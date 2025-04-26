@@ -1,0 +1,175 @@
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+
+// Definindo o tipo de navegação localmente
+type RootStackParamList = {
+  centros: undefined;
+  equipe: undefined;
+  sobre_o_projeto: undefined;
+  contato: undefined;
+  atualizarcadastro: undefined;
+  atualizarsenha: undefined;
+  login: undefined;
+};
+
+export default function OpcoesScreen() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
+  const handleLogout = async () => {
+    try {
+      // Se estiver usando AsyncStorage, descomente a linha abaixo para remover o token
+      // await AsyncStorage.removeItem('userToken');
+
+      // Navega para a tela de login
+      navigation.navigate('login');
+    } catch (err) {
+      console.error('Erro ao sair:', err);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Opções</Text>
+      </View>
+
+      <View style={styles.container1}>
+        <View style={styles.cardOpcao}>
+          <TouchableOpacity
+            style={styles.infoBox}
+            onPress={() => navigation.navigate('centros')}
+          >
+            <Text style={styles.cardOpcaoText}>Centros especializados</Text>
+            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.cardOpcao}>
+          <TouchableOpacity
+            style={styles.infoBox}
+            onPress={() => navigation.navigate('equipe')}
+          >
+            <Text style={styles.cardOpcaoText}>Conheça a equipe do projeto</Text>
+            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.cardOpcao}>
+          <TouchableOpacity
+            style={styles.infoBox}
+            onPress={() => navigation.navigate('sobre_o_projeto')}
+          >
+            <Text style={styles.cardOpcaoText}>Sobre o Projeto Craniofacial - UFS</Text>
+            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.cardOpcao}>
+          <TouchableOpacity
+            style={styles.infoBox}
+            onPress={() => navigation.navigate('contato')}
+          >
+            <Text style={styles.cardOpcaoText}>Contatos e informações</Text>
+            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.cardOpcao}>
+          <TouchableOpacity
+            style={styles.infoBox}
+            onPress={() => navigation.navigate('atualizarcadastro')}
+          >
+            <Text style={styles.cardOpcaoText}>Atualizar cadastro</Text>
+            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.cardOpcao}>
+          <TouchableOpacity
+            style={styles.infoBox}
+            onPress={() => navigation.navigate('atualizarsenha')}
+          >
+            <Text style={styles.cardOpcaoText}>Alterar senha</Text>
+            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.cardOpcao}>
+          <TouchableOpacity style={styles.infoBox} onPress={handleLogout}>
+            <Icon name="close-outline" size={24} color="#7E8EF1" />
+            <Text style={styles.cardOpcaoText}>Sair</Text>
+            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFF',
+  },
+  container1: {
+    paddingHorizontal: 16,
+  },
+  header: {
+    width: '100%',
+    paddingVertical: 16,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+    marginBottom: 16,
+  },
+  headerTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#BD9D56',
+  },
+  backButton: {
+    position: 'absolute',
+    left: 16,
+  },
+  cardOpcao: {
+    width: '100%',
+    backgroundColor: '#F2F2FC',
+    borderRadius: 8,
+    marginVertical: 8,
+    padding: 8,
+    justifyContent: 'center',
+  },
+  cardOpcaoText: {
+    color: '#AEACFB',
+    fontWeight: '600',
+    flex: 1,
+    fontSize: 14,
+  },
+  infoBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
+  rightIcon: {
+    marginLeft: 8,
+  },
+});
