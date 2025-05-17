@@ -3,6 +3,11 @@ import { StyleSheet } from 'react-native';
 
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { 
+  colors,
+  buttons,
+  buttonText 
+} from '@/constants';
 
 export default function NotFoundScreen() {
   return (
@@ -10,8 +15,8 @@ export default function NotFoundScreen() {
       <Stack.Screen options={{ title: 'Oops!' }} />
       <ThemedView style={styles.container}>
         <ThemedText type="title" style={styles.title}>Página não encontrada.</ThemedText>
-        <Link href="/" style={styles.button1}>
-          <ThemedText style={styles.buttonText1}>Voltar a página principal!</ThemedText>
+        <Link href="/" style={buttons.primary}>
+          <ThemedText style={buttonText.primary}>Voltar a página principal!</ThemedText>
         </Link>
       </ThemedView>
     </>
@@ -24,6 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
+    backgroundColor:colors.fundo,
   },
   link: {
     marginTop: 15,

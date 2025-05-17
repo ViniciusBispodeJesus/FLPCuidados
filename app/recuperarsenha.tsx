@@ -10,17 +10,24 @@ import {
   Modal
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
+import { 
+  colors,
+  buttons,
+  buttonText 
+} from '@/constants';
+
 
 export default function RecuperarSenha() {
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
+  const router = useRouter();
 
-  // Desativa o cabeçalho padrão ao carregar a tela
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false, // Remove o cabeçalho padrão do React Navigation
-    });
-  }, [navigation]);
+  // // Desativa o cabeçalho padrão ao carregar a tela
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerShown: false, // Remove o cabeçalho padrão do React Navigation
+  //   });
+  // }, [navigation]);
 
   // Estado para o e-mail
   const [email, setEmail] = useState('');
@@ -76,71 +83,78 @@ export default function RecuperarSenha() {
 
   return (
     <View style={styles.container}>
-
-      {/* Modal de Erro */}
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalBackground}>
-          <View style={styles.modalContainer}>
-            <Text style={styles.modalTitle}>Algo deu errado</Text>
-            <Text style={styles.modalMessage}>Falha ao enviar e-mail de recuperação.</Text>
-            <TouchableOpacity
-              style={styles.modalButton}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.modalButtonText}>OK</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
-
-      {/* Overlay de Carregamento */}
-      {isLoading && (
-        <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color="#AEACFB" />
-        </View>
-      )}
-
-      {/* Logo (caso deseje) */}
-      <Image
-        source={require('@/assets/images/logo.png')}
-        style={styles.logo}
-      />
-
-      {/* Título da tela */}
-      <Text style={styles.title}>Esqueci minha senha</Text>
-
-      {/* Subtítulo / instrução */}
-      <Text style={styles.label}>Informe seu e-mail de cadastro</Text>
-
-      {/* Campo de e-mail com ícone */}
-      <View style={[
-        styles.inputContainer, 
-        emailError ? { borderColor: 'red' } : null
-      ]}>
-        <Icon name="mail-outline" size={20} color="#AEACFB" style={styles.icon} />
-        <TextInput
-          style={styles.inputField}
-          placeholder="Digite o seu e-mail"
-          autoCapitalize="none"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={setEmail}
-          placeholderTextColor="#ABABAB"
-        />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+          <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Esqueci minha senha</Text>
       </View>
+      <View style={styles.container1}>
+        {/* Modal de Erro */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.modalBackground}>
+            <View style={styles.modalContainer}>
+              <Text style={styles.modalTitle}>Algo deu errado</Text>
+              <Text style={styles.modalMessage}>Falha ao enviar e-mail de recuperação.</Text>
+              <TouchableOpacity
+                style={styles.modalButton}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.modalButtonText}>OK</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
 
-      {/* Exibe mensagem de erro se existir */}
-      {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+        {/* Overlay de Carregamento */}
+        {isLoading && (
+          <View style={styles.loadingOverlay}>
+            <ActivityIndicator size="large" color="#AEACFB" />
+          </View>
+        )}
 
-      {/* Botão de Enviar */}
-      <TouchableOpacity style={styles.button} onPress={handleSendEmail}>
-        <Text style={styles.buttonText}>Enviar</Text>
-      </TouchableOpacity>
+        {/* Logo (caso deseje) */}
+        <Image
+          source={require('@/assets/images/logo2.png')}
+          style={styles.logo}
+        />
+
+        {/* Título da tela */}
+        <Text style={styles.title}>Esqueci minha senha</Text>
+
+        {/* Subtítulo / instrução */}
+        <Text style={styles.label}>Informe seu e-mail de cadastro</Text>
+
+        {/* Campo de e-mail com ícone */}
+        <View style={[
+          styles.inputContainer, 
+          emailError ? { borderColor: 'red' } : null
+        ]}>
+          <Icon name="mail-outline" size={20} color={colors.primary2} style={styles.icon} />
+          <TextInput
+            style={styles.inputField}
+            placeholder="Digite o seu e-mail"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+            placeholderTextColor="#ABABAB"
+          />
+        </View>
+
+        {/* Exibe mensagem de erro se existir */}
+        {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
+
+        {/* Botão de Enviar */}
+        <TouchableOpacity style={buttons.primary} onPress={handleSendEmail}>
+          <Text style={buttonText.primary}>Enviar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -149,9 +163,10 @@ export default function RecuperarSenha() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 16,
-    justifyContent: 'center'
+    backgroundColor: colors.fundo,
+  },
+    container1: {
+    paddingHorizontal: 16,
   },
   logo: {
     width: 200,
@@ -162,12 +177,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#BD9D56',
+    color: colors.text,
     textAlign: 'center',
     marginBottom: 24
   },
   label: {
-    color: "#BD9D56",
+    color: colors.text,
     fontSize: 14,
     fontWeight: "600",
     marginBottom: 8,
@@ -177,8 +192,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#AEACFB',
-    borderRadius: 25,
+    borderColor: colors.border,
+    borderRadius: 5,
     paddingHorizontal: 12,
     marginBottom: 4,
     alignSelf: 'center',
@@ -203,7 +218,7 @@ const styles = StyleSheet.create({
     maxWidth: 340,
     height: 40,
     borderRadius: 25,
-    backgroundColor: "#AEACFB",
+    backgroundColor: colors.primary,
     marginTop: 16,
     alignSelf: 'center',
     justifyContent: 'center',
@@ -213,6 +228,28 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 14,
     fontWeight: '600',
+  },
+    header: {
+    width: '100%',
+    padding: 16,
+    backgroundColor: '#fff',
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  backButton: {
+    position: 'absolute',
+    left: 16,
+  },
+  headerTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#BD9D56',
   },
   // Overlay de carregamento
   loadingOverlay: {
@@ -251,7 +288,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   modalButton: {
-    backgroundColor: '#AEACFB',
+    backgroundColor: colors.primary,
     borderRadius: 25,
     paddingVertical: 10,
     paddingHorizontal: 20

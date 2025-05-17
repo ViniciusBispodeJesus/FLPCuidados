@@ -2,13 +2,14 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Platform } from 'react-native';
+import { colors } from '@/constants';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: '#AEACFB', // Roxo claro para o ícone/texto ativo
+        tabBarActiveTintColor: colors.primary, // Roxo claro para o ícone/texto ativo
         tabBarInactiveTintColor: '#999999', // Cinza para o ícone/texto inativo
         tabBarStyle: Platform.select({
           ios: {
@@ -30,7 +31,6 @@ export default function TabLayout() {
             borderTopWidth: 1,
             borderTopColor: '#E8E8E8', // Cor da borda (opcional)
             height: 60, // Altura do tab bar
-
           },
         }),
         tabBarLabelStyle: {

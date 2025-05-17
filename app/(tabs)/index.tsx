@@ -10,6 +10,11 @@ import {
   ListRenderItem,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { 
+  colors,
+  buttons,
+  buttonText 
+} from '@/constants';
 
 // 1) Definindo a interface para os itens de conteúdo
 interface ConteudoItem {
@@ -48,7 +53,7 @@ export default function HomeScreen() {
   const renderCard: ListRenderItem<ConteudoItem> = ({ item }) => {
     return (
       <TouchableOpacity style={styles.cardItem}>
-        <Icon name="play-circle-outline" size={24} color="#AEACFB" />
+        <Icon name="play-circle-outline" size={24} color={colors.primary} />
         <Text style={styles.cardItemText}>{item.title}</Text>
       </TouchableOpacity>
     );
@@ -118,15 +123,15 @@ export default function HomeScreen() {
         <Text style={styles.sectionTitle}>Acesse por tipo de conteúdo</Text>
         <View style={styles.conteudoTipoContainer}>
           <TouchableOpacity style={styles.conteudoTipoButton}>
-            <Icon name="document-text-outline" size={24} color="#AEACFB" />
+            <Icon name="document-text-outline" size={24} color={colors.primary} />
             <Text style={styles.conteudoTipoText}>Texto</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.conteudoTipoButton}>
-            <Icon name="videocam-outline" size={24} color="#AEACFB" />
+            <Icon name="videocam-outline" size={24} color={colors.primary} />
             <Text style={styles.conteudoTipoText}>Vídeo</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.conteudoTipoButton}>
-            <Icon name="headset-outline" size={24} color="#AEACFB" />
+            <Icon name="headset-outline" size={24} color={colors.primary} />
             <Text style={styles.conteudoTipoText}>Áudio</Text>
           </TouchableOpacity>
         </View>
@@ -160,7 +165,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.fundo,
   },
   header: {
     padding: 16,
@@ -174,7 +179,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#AEACFB',
+    color: colors.primary,
     marginHorizontal: 16,
     marginTop: 16,
     marginBottom: 8,
@@ -217,7 +222,7 @@ const styles = StyleSheet.create({
   },
   cardItemText: {
     marginTop: 4,
-    color: '#AEACFB',
+    color: colors.primary,
     fontWeight: '600',
   },
   categoriasContainer: {
@@ -227,14 +232,14 @@ const styles = StyleSheet.create({
   },
   categoriaButton: {
     borderWidth: 1,
-    borderColor: '#AEACFB',
+    borderColor: colors.primary,
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 12,
     margin: 4,
   },
   categoriaText: {
-    color: '#AEACFB',
+    color: colors.primary,
     fontWeight: '600',
   },
   conteudoTipoContainer: {
@@ -248,7 +253,7 @@ const styles = StyleSheet.create({
   },
   conteudoTipoText: {
     marginTop: 4,
-    color: '#AEACFB',
+    color: colors.primary,
     fontWeight: '600',
   },
   bottomTab: {
@@ -265,11 +270,11 @@ const styles = StyleSheet.create({
   },
   tabButtonText: {
     fontSize: 12,
-    color: '#AEACFB',
+    color: colors.primary,
     marginTop: 4,
   },
   fissuraButton: {
-    borderColor: '#AEACFB',
+    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 20,
     paddingVertical: 8,

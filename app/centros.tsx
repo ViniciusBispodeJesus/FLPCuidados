@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { colors } from '@/constants';
 
 export default function CentrosEspecializadosScreen() {
   const navigation = useNavigation();
@@ -172,7 +173,7 @@ export default function CentrosEspecializadosScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.fundo,
   },
   header: {
     width: '100%',
@@ -180,7 +181,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
     justifyContent: 'center',
-    // Sombra (iOS) / Elevação (Android)
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -198,8 +198,8 @@ const styles = StyleSheet.create({
   },
   texto: {
     fontSize: 12,
-    fontWeight: '300',
-    color: '#7E8EF1',
+    fontWeight: '600',
+    color: colors.primary,
     textAlign: 'justify',
     paddingHorizontal: 8,
     marginVertical: 16,
@@ -215,10 +215,9 @@ const styles = StyleSheet.create({
   regionButton: {
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#7E8EF1',
+    borderColor: colors.primary,
     paddingVertical: 8,
     paddingHorizontal: 8,
-    backgroundColor: '#FFFFFF',
     marginVertical: 4,
     marginHorizontal: 5,
     width: 110,
@@ -227,7 +226,7 @@ const styles = StyleSheet.create({
   regionButtonText: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#7E8EF1',
+    color: colors.primary,
   },
   scrollContainer: {
     paddingHorizontal: 16,
@@ -251,7 +250,7 @@ const styles = StyleSheet.create({
   nome: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#AEACFB',
+    color: colors.primary,
     marginBottom: 4,
   },
   responsavel: {
@@ -271,13 +270,13 @@ const styles = StyleSheet.create({
   },
   email: {
     fontSize: 12,
-    color: '#0077b5',
+    color: colors.primary,
     textDecorationLine: 'underline',
     marginBottom: 4,
   },
   website: {
     fontSize: 12,
-    color: '#0077b5',
+    color: colors.primary,
     textDecorationLine: 'underline',
     marginBottom: 4,
   },

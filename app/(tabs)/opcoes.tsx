@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { colors } from '@/constants';
 
 // Definindo o tipo de navegação localmente
 type RootStackParamList = {
@@ -41,7 +42,7 @@ export default function OpcoesScreen() {
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
+          <Icon name="arrow-back-outline" size={24} color={colors.secondary}/>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Opções</Text>
       </View>
@@ -53,7 +54,7 @@ export default function OpcoesScreen() {
             onPress={() => navigation.navigate('centros')}
           >
             <Text style={styles.cardOpcaoText}>Centros especializados</Text>
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
 
@@ -63,7 +64,7 @@ export default function OpcoesScreen() {
             onPress={() => navigation.navigate('equipe')}
           >
             <Text style={styles.cardOpcaoText}>Conheça a equipe do projeto</Text>
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
 
@@ -73,7 +74,7 @@ export default function OpcoesScreen() {
             onPress={() => navigation.navigate('sobre_o_projeto')}
           >
             <Text style={styles.cardOpcaoText}>Sobre o Projeto Craniofacial - UFS</Text>
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
 
@@ -83,7 +84,7 @@ export default function OpcoesScreen() {
             onPress={() => navigation.navigate('contato')}
           >
             <Text style={styles.cardOpcaoText}>Contatos e informações</Text>
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
 
@@ -93,7 +94,7 @@ export default function OpcoesScreen() {
             onPress={() => navigation.navigate('atualizarcadastro')}
           >
             <Text style={styles.cardOpcaoText}>Atualizar cadastro</Text>
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
 
@@ -103,15 +104,15 @@ export default function OpcoesScreen() {
             onPress={() => navigation.navigate('atualizarsenha')}
           >
             <Text style={styles.cardOpcaoText}>Alterar senha</Text>
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
 
         <View style={styles.cardOpcao}>
           <TouchableOpacity style={styles.infoBox} onPress={handleLogout}>
-            <Icon name="close-outline" size={24} color="#7E8EF1" />
+            <Icon name="close-outline" size={24} color={colors.secondary} />
             <Text style={styles.cardOpcaoText}>Sair</Text>
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
       </View>
@@ -122,7 +123,7 @@ export default function OpcoesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: colors.fundo,
   },
   container1: {
     paddingHorizontal: 16,
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#BD9D56',
+    color: colors.secondary,
   },
   backButton: {
     position: 'absolute',
@@ -151,14 +152,14 @@ const styles = StyleSheet.create({
   },
   cardOpcao: {
     width: '100%',
-    backgroundColor: '#F2F2FC',
+    backgroundColor: colors.primary,
     borderRadius: 8,
     marginVertical: 8,
     padding: 8,
     justifyContent: 'center',
   },
   cardOpcaoText: {
-    color: '#AEACFB',
+    color: colors.secondary,
     fontWeight: '600',
     flex: 1,
     fontSize: 14,

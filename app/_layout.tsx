@@ -1,42 +1,56 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
+import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
+    if (loaded) SplashScreen.hideAsync();
   }, [loaded]);
 
-  if (!loaded) {
-    return null;
-  }
+  if (!loaded) return null;
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    <>
+      <Stack
+        screenOptions={{
+          headerShown: false,    // padrão: sem cabeçalho
+        }}
+      >
+        {/* Grupo principal de abas com header */}
+        <Stack.Screen 
+          name="(tabs)" 
+          options={{ headerShown: false }} 
+        />
+
+        {/* O restante herda headerShown: false */}
         <Stack.Screen name="splash" />
         <Stack.Screen name="login" />
-        <Stack.Screen name="home" />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen name="recuperarsenha" />
+        <Stack.Screen name="cadastro" />
+        <Stack.Screen name="atualizarcadastro" />
+        <Stack.Screen name="atualizarsenha" />
+        <Stack.Screen name="centros" />
+        <Stack.Screen name="contato" />
+        <Stack.Screen name="equipe" />
+        <Stack.Screen name="single_conteudo" />
+        <Stack.Screen name="sobre_o_projeto" />
+
+        {/* Rota fallback */}
+        <Stack.Screen 
+          name="+not-found" 
+          options={{ title: 'Página não encontrada' }} 
+        />
       </Stack>
       <StatusBar style="auto" />
-    </ThemeProvider>
+    </>
   );
 }

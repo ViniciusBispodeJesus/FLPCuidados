@@ -9,23 +9,25 @@ import {
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+//import { useNavigation } from '@react-navigation/native';
+import { colors } from '@/constants';
+import { router } from 'expo-router';
 
 export default function CentrosEspecializadosScreen() {
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
 
   // Desativa o cabeçalho padrão ao carregar a tela
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false, // Remove o cabeçalho padrão do React Navigation
-    });
-  }, [navigation]);
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerShown: false, // Remove o cabeçalho padrão do React Navigation
+  //   });
+  // }, [navigation]);
 
-  const handleOpenLink = (url: string | null) => {
-    if (url) {
-      Linking.openURL(url).catch((err) => console.error('Erro ao abrir link:', err));
-    }
-  };
+  // const handleOpenLink = (url: string | null) => {
+  //   if (url) {
+  //     Linking.openURL(url).catch((err) => console.error('Erro ao abrir link:', err));
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
@@ -33,9 +35,9 @@ export default function CentrosEspecializadosScreen() {
       <View style={styles.header}>
         <TouchableOpacity
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.back()}
         >
-          <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
+          <Icon name="arrow-back-outline" size={24} color={colors.secondary} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Sobre o Projeto</Text>
       </View>
@@ -80,7 +82,7 @@ export default function CentrosEspecializadosScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.fundo,
   },
   header: {
     width: '100%',
@@ -101,12 +103,12 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#BD9D56',
+    color: colors.secondary,
   },
   texto: {
     fontSize: 12,
-    fontWeight: '300',
-    color: '#7E8EF1',
+    fontWeight: '600',
+    color: colors.primary,
     textAlign: 'justify',
     paddingHorizontal: 8,
     lineHeight: 18,

@@ -1,4 +1,5 @@
 import React, { useState, useLayoutEffect } from 'react';
+import { router } from 'expo-router';
 import { 
   View,
   Text, 
@@ -11,17 +12,21 @@ import {
   Modal
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { 
+  colors,
+  buttons,
+  buttonText 
+} from '@/constants'; // Ajuste o caminho conforme necessário
 
 export default function LoginScreen() {
-  const navigation = useNavigation();
+  //const navigation = useNavigation();
 
   // Remove o cabeçalho padrão
-  useLayoutEffect(() => {
+  /*useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
-  }, [navigation]);
+  }, [navigation]);*/
 
   // Estados para inputs
   const [email, setEmail] = useState('');
@@ -46,10 +51,11 @@ export default function LoginScreen() {
     setPasswordError(false);
 
     // Validação simples: verifica se o e-mail possui "@" e se a senha foi informada
-    if (!email || !email.includes('@')) {
+    if (!email?.includes('@')) {
       setEmailError(true);
       return;
     }
+
     if (!password) {
       setPasswordError(true);
       return;
@@ -70,7 +76,7 @@ export default function LoginScreen() {
       }
 
       console.log('Login bem-sucedido!');
-      // navigation.navigate('Home');
+      router.replace('/');
     } catch (error) {
       console.log(error);
       setModalVisible(true);
@@ -103,22 +109,22 @@ export default function LoginScreen() {
         </View>
       </Modal>
 
-      {/* Overlay de Carregamento */}
+      {/* Overlay de Carregamento*/}
       {isLoading && (
         <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color="#AEACFB" />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       )}
 
       <Image
-        source={require('@/assets/images/logo.png')}
+        source={require('@/assets/images/logo2.png')}
         style={{ width: 200, height: 200, marginBottom: 16, alignSelf: 'center' }}
       />
 
       {/* Campo de e-mail com ícone */}
       <Text style={styles.label}>E-mail</Text>
       <View style={[styles.inputContainer, emailError && { borderColor: 'red' }]}>
-        <Icon name="mail-outline" size={20} color="#AEACFB" style={styles.icon} />
+        <Icon name="mail-outline" size={20} color={colors.primary} style={styles.icon} />
         <TextInput
           style={styles.inputField}
           placeholder="Digite o seu e-mail"
@@ -126,7 +132,7 @@ export default function LoginScreen() {
           keyboardType="email-address"
           value={email}
           onChangeText={setEmail}
-          placeholderTextColor="#ABABAB"
+          placeholderTextColor= {colors.inputtext}
         />
       </View>
       {emailError && (
@@ -136,20 +142,20 @@ export default function LoginScreen() {
       {/* Campo de senha com ícone e botão para mostrar/ocultar */}
       <Text style={styles.label}>Senha</Text>
       <View style={[styles.inputContainer, passwordError && { borderColor: 'red' }]}>
-        <Icon name="lock-closed-outline" size={20} color="#AEACFB" style={styles.icon} />
+        <Icon name="lock-closed-outline" size={20} color={colors.primary} style={styles.icon} />
         <TextInput
           style={styles.inputField}
           placeholder="Digite a sua senha"
           secureTextEntry={secureText}
           value={password}
           onChangeText={setPassword}
-          placeholderTextColor="#ABABAB"
+          placeholderTextColor = {colors.inputtext}
         />
         <TouchableOpacity onPress={() => setSecureText(!secureText)}>
           <Icon 
             name={secureText ? 'eye-off-outline' : 'eye-outline'} 
             size={20} 
-            color="#AEACFB" 
+            color={colors.primary} 
           />
         </TouchableOpacity>
       </View>
@@ -157,17 +163,16 @@ export default function LoginScreen() {
         <Text style={styles.errorText}>A senha é obrigatória.</Text>
       )}
 
-      {/* Navegação para a tela de recuperação de senha */}
-      <Pressable onPress={() => navigation.navigate('recuperarsenha')}>
+      <Pressable onPress={() => router.push('/recuperarsenha')}>
         <Text style={styles.texto}>Esqueci minha senha</Text>
       </Pressable>
 
-      <TouchableOpacity style={styles.button1} onPress={handleLogin} disabled={isLoading}>
-        <Text style={styles.buttonText1}>Entrar</Text>
+      <TouchableOpacity style={buttons.primary} onPress={handleLogin} disabled={isLoading}>
+        <Text style={buttonText.primary}>Entrar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button2}>
-        <Text style={styles.buttonText2}>Cadastrar</Text>
+      <TouchableOpacity style={buttons.secondary} onPress={() => router.push('/cadastro')}>
+        <Text style={buttonText.secondary}>Cadastrar</Text>
       </TouchableOpacity>
     </View>
   );
@@ -178,16 +183,16 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     justifyContent: 'center',
-    backgroundColor: '#fff'
+    backgroundColor: colors.fundo,
   },
   label: {
-    color: "#BD9D56",
+    color: colors.secondary,
     fontSize: 14,
     fontWeight: "600",
     marginBottom: 8,
   },
   texto: {
-    color: "#BD9D56",
+    color: colors.secondary,
     fontSize: 14,
     fontWeight: "600",
     marginBottom: 16,
@@ -197,8 +202,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#AEACFB',
-    borderRadius: 25,
+    borderColor: colors.border,
+    borderRadius: 5,
     paddingHorizontal: 12,
     marginBottom: 12,
   },
@@ -214,35 +219,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 8,
     textAlign: 'center'
-  },
-  button1: {
-    width: "100%",
-    height: 40,
-    borderRadius: 25,
-    backgroundColor: "#AEACFB",
-    marginBottom: 16,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  button2: {
-    width: "100%",
-    height: 40,
-    borderRadius: 25,
-    borderWidth: 1,
-    borderColor: '#AEACFB',
-    marginBottom: 16,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonText1: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  buttonText2: {
-    color: "#AEACFB",
-    fontSize: 14,
-    fontWeight: '600',
   },
   loadingOverlay: {
     position: 'absolute',
@@ -279,7 +255,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   modalButton: {
-    backgroundColor: '#AEACFB',
+    backgroundColor: colors.primary,
     borderRadius: 25,
     paddingVertical: 10,
     paddingHorizontal: 20

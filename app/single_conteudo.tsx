@@ -4,6 +4,11 @@ import { WebView } from 'react-native-webview'; // Usado apenas em mobile
 import { RouteProp, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { 
+  colors,
+  buttons,
+  buttonText 
+} from '@/constants';
 
 type RootStackParamList = {
   SingleConteudo: {
@@ -99,7 +104,7 @@ export default function SingleConteudo({ route }: SingleConteudoProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.fundo,
   },
   container1: {
     paddingHorizontal: 16,
@@ -129,7 +134,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 12,
-    color: '#7E8EF1',
+    color: colors.primary,
     textAlign: 'center',
     marginTop: 16,
   },
@@ -139,8 +144,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     marginTop: 12,
-    color: '#7E8EF1',
+    color: colors.primary,
     textAlign: 'justify',
+    fontWeight: '600',
   },
 
   // Container do vídeo

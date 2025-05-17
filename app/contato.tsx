@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { colors } from '@/constants';
 
 export default function CentrosEspecializadosScreen() {
   const navigation = useNavigation();
@@ -48,12 +49,12 @@ export default function CentrosEspecializadosScreen() {
             style={styles.infoBox}
             onPress={() => handleOpenLink('https://maps.app.goo.gl/eg78ZVYhXPvnLhj48')}
           >
-            <Icon name="location-outline" size={24} color="#7E8EF1" style={styles.leftIcon} />
+            <Icon name="location-outline" size={24} color={colors.cor_pag_especifica} style={styles.leftIcon} />
             
             <Text style={styles.infoText}> Av. Marcelo DÉda, 13, São José, Lagarto SE - Brasil. 
             <br></br>CEP: 49400-000</Text>
             
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.cor_pag_especifica} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
 
@@ -64,11 +65,11 @@ export default function CentrosEspecializadosScreen() {
             style={styles.infoBox}
             onPress={() => handleOpenLink('mailto:craniofacial.ufs@gmail.com')}
           >
-            <Icon name="mail-outline" size={24} color="#7E8EF1" style={styles.leftIcon} />
+            <Icon name="mail-outline" size={24} color={colors.cor_pag_especifica} style={styles.leftIcon} />
             
             <Text style={styles.infoText}>craniofacial.ufs@gmail.com</Text>
             
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.cor_pag_especifica} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
 
@@ -79,11 +80,11 @@ export default function CentrosEspecializadosScreen() {
             style={styles.infoBox}
             onPress={() => handleOpenLink('tel:+557936322128')}
           >
-            <Icon name="call-outline" size={24} color="#7E8EF1" style={styles.leftIcon} />
+            <Icon name="call-outline" size={24} color={colors.cor_pag_especifica} style={styles.leftIcon} />
 
             <Text style={styles.infoText}>(79) 3632-2128</Text>
 
-            <Icon name="chevron-forward-outline" size={24} color="#7E8EF1" style={styles.rightIcon} />
+            <Icon name="chevron-forward-outline" size={24} color={colors.cor_pag_especifica} style={styles.rightIcon} />
           </TouchableOpacity>
         </View>
 
@@ -114,7 +115,7 @@ export default function CentrosEspecializadosScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.fundo,
   },
   header: {
     width: '100%',
@@ -154,11 +155,12 @@ const styles = StyleSheet.create({
   infoBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: '#7E8EF1',
+    borderColor: colors.cor_pag_especifica,
     borderWidth: 1,
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 16,
+    backgroundColor: colors.primary,
   },
   leftIcon: {
     marginRight: 8,
@@ -169,7 +171,7 @@ const styles = StyleSheet.create({
   infoText: {
     flex: 1,
     fontSize: 14,
-    color: '#666666',
+    color: colors.cor_pag_especifica,
   },
   socialContainer: {
     flexDirection: 'row',
@@ -182,8 +184,8 @@ const styles = StyleSheet.create({
   socialText: {
     marginTop: 8,
     fontSize: 12,
-    fontWeight: '300',
-    color: '#7E8EF1',
+    fontWeight: '600',
+    color: colors.primary,
     textAlign: 'center',
   },
 });

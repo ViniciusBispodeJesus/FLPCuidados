@@ -1,18 +1,21 @@
 import React, { useEffect } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import SplashScreen from "react-native-splash-screen";
+import { View, Image, StyleSheet } from "react-native";
+import { router } from "expo-router";
+import { 
+  colors,
+} from '@/constants';
 
-const App = () => {
+export default function Splash() {
   useEffect(() => {
-    setTimeout(() => {
-      SplashScreen.hide(); // Oculta a Splash Screen após 2s
+    const timeout = setTimeout(() => {
+      router.replace("/login"); // redireciona para a tela de login
     }, 2000);
+    return () => clearTimeout(timeout); // limpa o timeout se o componente desmontar antes
   }, []);
-
   return (
     <View style={styles.container}>
       <Image
-        source={require('@/assets/images/logo.png')}
+        source={require('@/assets/images/logo2.png')}
         style={{ width: 200, height: 200, marginBottom: 16, alignSelf: 'center' }}
       />
     </View>
@@ -24,16 +27,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FFF", // Fundo branco igual à imagem
+    backgroundColor: colors.fundo,
   },
   logo: {
     width: 150,
     height: 150,
     resizeMode: "contain",
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#A68247", // Cor dourada do texto
   },
 });

@@ -9,6 +9,11 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Certifique-se de que está instalado
+import { 
+  colors,
+  buttons,
+  buttonText 
+} from '@/constants';
 
 const ContentSearchScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -53,9 +58,9 @@ const ContentSearchScreen = () => {
   const renderContentItem = ({ item }) => (
     <View style={styles.contentItem}>
       <View style={styles.iconContainer}>
-        {item.category === 'video' && <Icon name="play" size={20} color="#7E8EF1" />}
-        {item.category === 'textos' && <Icon name="file-text" size={20} color="#7E8EF1" />}
-        {item.category === 'podcasts' && <Icon name="microphone" size={20} color="#7E8EF1" />}
+        {item.category === 'video' && <Icon name="play" size={20} color={colors.primary} />}
+        {item.category === 'textos' && <Icon name="file-text" size={20} color={colors.primary} />}
+        {item.category === 'podcasts' && <Icon name="microphone" size={20} color={colors.primary} />}
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.contentTitle}>{item.title}</Text>
@@ -195,7 +200,7 @@ const styles = StyleSheet.create({
   },
   selectedFissureType: {
     fontSize: 16,
-    color: '#7E8EF1',
+    color: colors.primary,
     marginVertical: 8,
   },
   picker: {
@@ -220,8 +225,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoryButtonSelected: {
-    backgroundColor: '#7E8EF1',
-    borderColor: '#7E8EF1',
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
   categoryText: {
     fontSize: 14,

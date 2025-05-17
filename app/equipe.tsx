@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { colors } from '@/constants';
 
 export default function EquipeScreen() {
   const navigation = useNavigation();
@@ -142,7 +143,7 @@ export default function EquipeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.fundo,
   },
   // Cabeçalho com centralização do título
   header: {
@@ -180,7 +181,6 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     marginRight: 12,
-    backgroundColor: '#eee',
   },
   infoContainer: {
     flex: 1,
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   nome: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#AEACFB',
+    color: colors.primary,
     marginBottom: 2,
   },
   funcao: {

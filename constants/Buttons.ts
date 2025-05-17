@@ -1,30 +1,48 @@
-// styles.js ou dentro de theme.js
-/*import { StyleSheet } from 'react-native';
-import { Colors } from './Colors';
+import { StyleSheet } from 'react-native';
+import { colors } from './Colors';
 
-export const GlobalStyles = StyleSheet.create({
-  buttonBase: {
-    width: '100%',
-    height: 40,
+export const buttons = StyleSheet.create({
+  primary: {
+    backgroundColor: colors.primary,
+    padding: 12,
     borderRadius: 25,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    width: "100%",
+    height: 40,
+    marginBottom: 16,
+    marginTop: 16,
+  },
+  secondary: {
+    borderColor: colors.primary,
+    borderWidth: 1,
+    padding: 12,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    width: "100%",
+    height: 40,
     marginBottom: 16,
   },
-  buttonPrimary: {
-    backgroundColor: colors.primary,
+  base: {
+    height: 48,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 16,
   },
-  buttonOutline: {
-    borderWidth: 1,
-    borderColor: colors.primary,
-  },
-  buttonText: {
+});
+
+export const buttonText = StyleSheet.create({
+  primary: {
     color: colors.white,
-    ...fonts.bold,
+    fontSize: 14,
+    fontWeight: '600',
   },
-  textBase: {
-    color: colors.text,
-    ...fonts.bold,
-    marginBottom: 8,
+  secondary: {
+    color: colors.primary,
+    fontSize: 14,
+    fontWeight: '600',
   },
-});*/
+});

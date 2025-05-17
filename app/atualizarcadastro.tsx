@@ -12,6 +12,11 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { 
+  colors,
+  buttons,
+  buttonText 
+} from '@/constants';
 
 // 1) Importe o TextInputMask
 import { TextInputMask } from 'react-native-masked-text';
@@ -172,7 +177,7 @@ export default function CadastroScreen() {
                 {/* Nome */}
                 <Text style={styles.label}>Nome</Text>
                 <View style={[styles.inputContainer, nomeError ? { borderColor: 'red' } : null]}>
-                <Icon name="person-outline" size={20} color="#AEACFB" style={styles.icon} />
+                <Icon name="person-outline" size={20} color={colors.primary2} style={styles.icon} />
                 <TextInput
                     style={styles.inputField}
                     placeholder="Digite o seu nome"
@@ -186,7 +191,7 @@ export default function CadastroScreen() {
                 {/* Telefone com MÁSCARA */}
                 <Text style={styles.label}>Telefone</Text>
                 <View style={[styles.inputContainer, telefoneError ? { borderColor: 'red' } : null]}>
-                <Icon name="call-outline" size={20} color="#AEACFB" style={styles.icon} />
+                <Icon name="call-outline" size={20} color={colors.primary2} style={styles.icon} />
                 
                 {/* 2) Usamos TextInputMask no lugar de TextInput */}
                 <TextInputMask
@@ -207,7 +212,7 @@ export default function CadastroScreen() {
                 {/* E-mail */}
                 <Text style={styles.label}>E-mail</Text>
                 <View style={[styles.inputContainer, emailError ? { borderColor: 'red' } : null]}>
-                <Icon name="mail-outline" size={20} color="#AEACFB" style={styles.icon} />
+                <Icon name="mail-outline" size={20} color={colors.primary2} style={styles.icon} />
                 <TextInput
                     style={styles.inputField}
                     placeholder="Digite o seu e-mail"
@@ -221,8 +226,8 @@ export default function CadastroScreen() {
                 {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
                 {/* Botão para ir para a próxima etapa */}
-                <TouchableOpacity style={styles.button1} onPress={handleNextStep}>
-                <Text style={styles.buttonText1}>Continuar</Text>
+                <TouchableOpacity style={buttons.primary} onPress={handleNextStep}>
+                <Text style={buttonText.primary}>Continuar</Text>
                 </TouchableOpacity>
             </View>    
         </View>
@@ -252,7 +257,7 @@ export default function CadastroScreen() {
                         key={item.id}
                         style={[
                         styles.fissuraButton,
-                        isSelected ? { backgroundColor: '#AEACFB' } : null
+                        isSelected ? { backgroundColor: colors.primary } : null
                         ]}
                         onPress={() => setTipoFissura(item.id)}
                     >
@@ -276,7 +281,7 @@ export default function CadastroScreen() {
                         key={opcao}
                         style={[
                         styles.opcaoButton,
-                        isSelected ? { backgroundColor: '#AEACFB' } : null
+                        isSelected ? { backgroundColor: colors.primary } : null
                         ]}
                         onPress={() => toggleOpcao(opcao)}
                     >
@@ -291,8 +296,8 @@ export default function CadastroScreen() {
                 })}
                 </View>
 
-                <TouchableOpacity style={styles.button1} onPress={handleFinish}>
-                <Text style={styles.buttonText1}>Finalizar cadastro</Text>
+                <TouchableOpacity style={buttons.primary} onPress={handleFinish}>
+                <Text style={buttonText.primary}>Finalizar cadastro</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -342,7 +347,7 @@ export default function CadastroScreen() {
       {/* Overlay de Carregamento */}
       {isLoading && (
         <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color="#AEACFB" />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       )}
 
@@ -359,7 +364,7 @@ export default function CadastroScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: colors.fundo,
   },
   container1: {
     paddingHorizontal: 16,
@@ -421,7 +426,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   modalButton: {
-    backgroundColor: '#AEACFB',
+    backgroundColor: colors.primary,
     borderRadius: 25,
     paddingVertical: 10,
     paddingHorizontal: 20
@@ -431,7 +436,7 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   title: {
-    color: "#AEACFB",
+    color: colors.primary,
     fontSize: 20,
     fontWeight: "700",
     marginBottom: 30,
@@ -454,8 +459,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#AEACFB',
-    borderRadius: 25,
+    borderColor: colors.border,
+    borderRadius: 5,
     paddingHorizontal: 12,
     marginBottom: 16,
   },
@@ -493,7 +498,8 @@ const styles = StyleSheet.create({
     marginBottom: 24
   },
   fissuraButton: {
-    borderColor: '#AEACFB',
+    borderColor: colors.primary,
+
     borderWidth: 1,
     borderRadius: 20,
     paddingVertical: 8,
@@ -502,7 +508,7 @@ const styles = StyleSheet.create({
     marginVertical: 4
   },
   fissuraButtonText: {
-    color: '#AEACFB',
+    color: colors.primary,
     fontWeight: '600'
   },
   opcoesContainer: {
@@ -512,7 +518,7 @@ const styles = StyleSheet.create({
     marginBottom: 24
   },
   opcaoButton: {
-    borderColor: '#AEACFB',
+    borderColor: colors.primary,
     borderWidth: 1,
     borderRadius: 20,
     paddingVertical: 6,
@@ -520,8 +526,7 @@ const styles = StyleSheet.create({
     margin: 4
   },
   opcaoButtonText: {
-    color: '#AEACFB',
+    color: colors.primary,
     fontWeight: '600'
   },
 });
-

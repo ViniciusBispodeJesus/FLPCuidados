@@ -10,6 +10,11 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { 
+  colors,
+  buttons,
+  buttonText 
+} from '@/constants';
 
 export default function AtualizarSenhaScreen() {
   const navigation = useNavigation();
@@ -139,7 +144,7 @@ export default function AtualizarSenhaScreen() {
           <Icon
             name="lock-closed-outline"
             size={20}
-            color="#AEACFB"
+            color={colors.primary2}
             style={styles.icon}
           />
           <TextInput
@@ -154,7 +159,7 @@ export default function AtualizarSenhaScreen() {
             <Icon
               name={senhaAtualOculta ? 'eye-off-outline' : 'eye-outline'}
               size={20}
-              color="#AEACFB"
+              color={colors.primary2}
             />
           </TouchableOpacity>
         </View>
@@ -171,7 +176,7 @@ export default function AtualizarSenhaScreen() {
           <Icon
             name="lock-closed-outline"
             size={20}
-            color="#AEACFB"
+            color={colors.primary2}
             style={styles.icon}
           />
           <TextInput
@@ -186,7 +191,7 @@ export default function AtualizarSenhaScreen() {
             <Icon
               name={novaSenhaOculta ? 'eye-off-outline' : 'eye-outline'}
               size={20}
-              color="#AEACFB"
+              color={colors.primary2}
             />
           </TouchableOpacity>
         </View>
@@ -203,7 +208,7 @@ export default function AtualizarSenhaScreen() {
           <Icon
             name="lock-closed-outline"
             size={20}
-            color="#AEACFB"
+            color={colors.primary2}
             style={styles.icon}
           />
           <TextInput
@@ -218,15 +223,15 @@ export default function AtualizarSenhaScreen() {
             <Icon
               name={confirmarSenhaOculta ? 'eye-off-outline' : 'eye-outline'}
               size={20}
-              color="#AEACFB"
+              color={colors.primary2}
             />
           </TouchableOpacity>
         </View>
         {confirmarSenhaError ? <Text style={styles.errorText}>{confirmarSenhaError}</Text> : null}
 
         {/* Botão para atualizar */}
-        <TouchableOpacity style={styles.button} onPress={handleUpdate}>
-          <Text style={styles.buttonText}>Atualizar</Text>
+        <TouchableOpacity style={buttons.primary} onPress={handleUpdate}>
+          <Text style={buttonText.primary}>Atualizar</Text>
         </TouchableOpacity>
       </View>
 
@@ -254,7 +259,7 @@ export default function AtualizarSenhaScreen() {
       {/* Overlay de Carregamento */}
       {isLoading && (
         <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color="#AEACFB" />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       )}
     </View>
@@ -306,8 +311,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#AEACFB',
-    borderRadius: 25,
+    borderColor: colors.border,
+    borderRadius: 5,
     paddingHorizontal: 12,
     marginBottom: 16,
   },
@@ -331,7 +336,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 40,
     borderRadius: 25,
-    backgroundColor: '#AEACFB',
+    backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 8,
@@ -366,7 +371,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalButton: {
-    backgroundColor: '#AEACFB',
+    backgroundColor: colors.primary,
     borderRadius: 25,
     paddingVertical: 10,
     paddingHorizontal: 20,
