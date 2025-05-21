@@ -44,7 +44,7 @@ export default function TabLayout() {
         tabBarIcon: ({ color, size }) => {
           // Tipagem para aceitar apenas os ícones disponíveis
           const icons: Record<string, keyof typeof Ionicons.glyphMap> = {
-            index: 'home-outline',
+            home: 'home-outline',
             conteudos: 'search-outline',
             opcoes: 'grid-outline',
           };
@@ -56,9 +56,9 @@ export default function TabLayout() {
       })}
     >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Início',
+          title: 'Home',
         }}
       />
       <Tabs.Screen

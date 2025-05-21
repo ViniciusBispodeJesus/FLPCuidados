@@ -1,25 +1,18 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
+  Pressable,
   Linking,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
 import { colors } from '@/constants';
+import { useRouter } from 'expo-router';
 
 export default function CentrosEspecializadosScreen() {
-  const navigation = useNavigation();
-
-  // Desativa o cabeçalho padrão ao carregar a tela
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false, // Remove o cabeçalho padrão do React Navigation
-    });
-  }, [navigation]);
+  const router = useRouter();
 
   // Dados dos centros especializados por região
   const centros = {
@@ -68,12 +61,12 @@ export default function CentrosEspecializadosScreen() {
     <View style={styles.container}>
       {/* Cabeçalho com botão de voltar e título centralizado */}
       <View style={styles.header}>
-        <TouchableOpacity
+        <Pressable
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.back()}
         >
           <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.headerTitle}>Centros Especializados</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -86,21 +79,21 @@ export default function CentrosEspecializadosScreen() {
 
         {/* Seção de botões de regiões */}
         <View style={styles.regionButtons}>
-          <TouchableOpacity style={styles.regionButton}>
+          <Pressable style={styles.regionButton}>
             <Text style={styles.regionButtonText}>Norte</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.regionButton}>
+          </Pressable>
+          <Pressable style={styles.regionButton}>
             <Text style={styles.regionButtonText}>Nordeste</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.regionButton}>
+          </Pressable>
+          <Pressable style={styles.regionButton}>
             <Text style={styles.regionButtonText}>Centro-Oeste</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.regionButton}>
+          </Pressable>
+          <Pressable style={styles.regionButton}>
             <Text style={styles.regionButtonText}>Sudeste</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.regionButton}>
+          </Pressable>
+          <Pressable style={styles.regionButton}>
             <Text style={styles.regionButtonText}>Sul</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* Lista de centros da região Norte (exemplo) */}
@@ -127,36 +120,36 @@ export default function CentrosEspecializadosScreen() {
 
             {/* E-mail (link para enviar e-mail) */}
             {centro.email && (
-              <TouchableOpacity onPress={() => handleOpenLink(`mailto:${centro.email}`)}>
+              <Pressable onPress={() => handleOpenLink(`mailto:${centro.email}`)}>
                 <Text style={styles.email}>E-mail: {centro.email}</Text>
-              </TouchableOpacity>
+              </Pressable>
             )}
 
             {/* Website (link para abrir no navegador) */}
             {centro.website && (
-              <TouchableOpacity onPress={() => handleOpenLink(centro.website)}>
+              <Pressable onPress={() => handleOpenLink(centro.website)}>
                 <Text style={styles.website}>Website: {centro.website}</Text>
-              </TouchableOpacity>
+              </Pressable>
             )}
 
             {/* Redes sociais (caso existam) */}
             {centro.redes && (
               <View style={styles.redesContainer}>
                 {centro.redes.facebook && (
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.iconeSocial}
                     onPress={() => handleOpenLink(centro.redes.facebook)}
                   >
                     <Icon name="logo-facebook" size={24} color="#3b5998" />
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
                 {centro.redes.instagram && (
-                  <TouchableOpacity
+                  <Pressable
                     style={styles.iconeSocial}
                     onPress={() => handleOpenLink(centro.redes.instagram)}
                   >
                     <Icon name="logo-instagram" size={24} color="#C13584" />
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
               </View>
             )}

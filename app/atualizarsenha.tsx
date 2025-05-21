@@ -1,15 +1,15 @@
-import React, { useState , useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   ActivityIndicator,
   Modal,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import { 
   colors,
   buttons,
@@ -17,14 +17,7 @@ import {
 } from '@/constants';
 
 export default function AtualizarSenhaScreen() {
-  const navigation = useNavigation();
-
-  // Desativa o cabeçalho padrão ao carregar a tela
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false, // Remove o cabeçalho padrão do React Navigation
-    });
-  }, [navigation]);
+  const router = useRouter();
 
   // -------------------------------------------------------------
   // ESTADOS GERAIS
@@ -122,12 +115,12 @@ export default function AtualizarSenhaScreen() {
 
       {/* Cabeçalho */}
       <View style={styles.header}>
-        <TouchableOpacity
+        <Pressable
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.back()}
         >
           <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.headerTitle}>Atualizar Senha</Text>
       </View>
 
@@ -155,13 +148,13 @@ export default function AtualizarSenhaScreen() {
             onChangeText={setSenhaAtual}
             placeholderTextColor="#ABABAB"
           />
-          <TouchableOpacity onPress={() => setSenhaAtualOculta(!senhaAtualOculta)}>
+          <Pressable onPress={() => setSenhaAtualOculta(!senhaAtualOculta)}>
             <Icon
               name={senhaAtualOculta ? 'eye-off-outline' : 'eye-outline'}
               size={20}
               color={colors.primary2}
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
         {senhaAtualError ? <Text style={styles.errorText}>{senhaAtualError}</Text> : null}
 
@@ -187,13 +180,13 @@ export default function AtualizarSenhaScreen() {
             onChangeText={setNovaSenha}
             placeholderTextColor="#ABABAB"
           />
-          <TouchableOpacity onPress={() => setNovaSenhaOculta(!novaSenhaOculta)}>
+          <Pressable onPress={() => setNovaSenhaOculta(!novaSenhaOculta)}>
             <Icon
               name={novaSenhaOculta ? 'eye-off-outline' : 'eye-outline'}
               size={20}
               color={colors.primary2}
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
         {novaSenhaError ? <Text style={styles.errorText}>{novaSenhaError}</Text> : null}
 
@@ -219,20 +212,20 @@ export default function AtualizarSenhaScreen() {
             onChangeText={setConfirmarSenha}
             placeholderTextColor="#ABABAB"
           />
-          <TouchableOpacity onPress={() => setConfirmarSenhaOculta(!confirmarSenhaOculta)}>
+          <Pressable onPress={() => setConfirmarSenhaOculta(!confirmarSenhaOculta)}>
             <Icon
               name={confirmarSenhaOculta ? 'eye-off-outline' : 'eye-outline'}
               size={20}
               color={colors.primary2}
             />
-          </TouchableOpacity>
+          </Pressable>
         </View>
         {confirmarSenhaError ? <Text style={styles.errorText}>{confirmarSenhaError}</Text> : null}
 
         {/* Botão para atualizar */}
-        <TouchableOpacity style={buttons.primary} onPress={handleUpdate}>
+        <Pressable style={buttons.primary} onPress={handleUpdate}>
           <Text style={buttonText.primary}>Atualizar</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       {/* Modal de Erro (para erros de servidor, etc.) */}
@@ -246,12 +239,12 @@ export default function AtualizarSenhaScreen() {
           <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Algo deu errado</Text>
             <Text style={styles.modalMessage}>Falha ao atualizar a senha.</Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.modalButton}
               onPress={() => setModalVisible(false)}
             >
               <Text style={styles.modalButtonText}>OK</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -272,7 +265,7 @@ export default function AtualizarSenhaScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.fundo,
   },
   // Cabeçalho
   header: {
@@ -315,6 +308,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 12,
     marginBottom: 16,
+    backgroundColor: colors.white,
   },
   icon: {
     marginRight: 8,

@@ -1,11 +1,10 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { router } from 'expo-router';
 import { 
   View,
   Text, 
   TextInput, 
   StyleSheet, 
-  TouchableOpacity, 
   Pressable, 
   Image,
   ActivityIndicator,
@@ -19,14 +18,6 @@ import {
 } from '@/constants'; // Ajuste o caminho conforme necessário
 
 export default function LoginScreen() {
-  //const navigation = useNavigation();
-
-  // Remove o cabeçalho padrão
-  /*useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, [navigation]);*/
 
   // Estados para inputs
   const [email, setEmail] = useState('');
@@ -99,12 +90,12 @@ export default function LoginScreen() {
           <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Algo deu errado</Text>
             <Text style={styles.modalMessage}>Falha ao realizar login.</Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.modalButton}
               onPress={() => setModalVisible(false)}
             >
               <Text style={styles.modalButtonText}>OK</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -117,7 +108,7 @@ export default function LoginScreen() {
       )}
 
       <Image
-        source={require('@/assets/images/logo2.png')}
+        source={require('@/assets/images/logo3.png')}
         style={{ width: 200, height: 200, marginBottom: 16, alignSelf: 'center' }}
       />
 
@@ -151,13 +142,13 @@ export default function LoginScreen() {
           onChangeText={setPassword}
           placeholderTextColor = {colors.inputtext}
         />
-        <TouchableOpacity onPress={() => setSecureText(!secureText)}>
+        <Pressable onPress={() => setSecureText(!secureText)}>
           <Icon 
             name={secureText ? 'eye-off-outline' : 'eye-outline'} 
             size={20} 
             color={colors.primary} 
           />
-        </TouchableOpacity>
+        </Pressable>
       </View>
       {passwordError && (
         <Text style={styles.errorText}>A senha é obrigatória.</Text>
@@ -167,13 +158,13 @@ export default function LoginScreen() {
         <Text style={styles.texto}>Esqueci minha senha</Text>
       </Pressable>
 
-      <TouchableOpacity style={buttons.primary} onPress={handleLogin} disabled={isLoading}>
+      <Pressable style={buttons.primary} onPress={handleLogin} disabled={isLoading}>
         <Text style={buttonText.primary}>Entrar</Text>
-      </TouchableOpacity>
+      </Pressable>
 
-      <TouchableOpacity style={buttons.secondary} onPress={() => router.push('/cadastro')}>
+      <Pressable style={buttons.secondary} onPress={() => router.push('/cadastro')}>
         <Text style={buttonText.secondary}>Cadastrar</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }
@@ -206,6 +197,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 12,
     marginBottom: 12,
+    backgroundColor: colors.white,
   },
   icon: {
     marginRight: 8

@@ -1,15 +1,15 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   View,
   Text, 
   TextInput, 
   StyleSheet, 
-  TouchableOpacity, 
+  Pressable, 
   ActivityIndicator,
   Modal
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import { TextInputMask } from 'react-native-masked-text';
 import { 
   colors,
@@ -18,14 +18,7 @@ import {
 } from '@/constants';
 
 export default function CadastroScreen() {
-  const navigation = useNavigation();
-
-    // Desativa o cabeçalho padrão ao carregar a tela
-    useLayoutEffect(() => {
-      navigation.setOptions({
-        headerShown: false, // Remove o cabeçalho padrão do React Navigation
-      });
-    }, [navigation]);
+  const router = useRouter();
 
   // -------------------------------------------------------------
   // 1) ESTADOS GERAIS
@@ -172,7 +165,7 @@ export default function CadastroScreen() {
       console.log('Cadastro finalizado com sucesso!');
 
       // Exemplo: navegar ou limpar formulário
-      // navigation.navigate('Home');
+      // router.navigate('Home');
     } catch (error) {
       console.log(error);
       setModalVisible(true);
@@ -188,12 +181,12 @@ export default function CadastroScreen() {
     return (
       <>
         <View style={styles.header}>
-          <TouchableOpacity
+          <Pressable
             style={styles.backButton}
-            onPress={() => navigation.goBack()}
+            onPress={() => router.back()}
           >
             <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-          </TouchableOpacity>
+          </Pressable>
           <Text style={styles.headerTitle}>Cadastrar</Text>
         </View>
         <View style={styles.container1}>
@@ -260,13 +253,13 @@ export default function CadastroScreen() {
               onChangeText={setSenha}
               placeholderTextColor="#ABABAB"
             />
-            <TouchableOpacity onPress={() => setSenhaOculta(!senhaOculta)}>
+            <Pressable onPress={() => setSenhaOculta(!senhaOculta)}>
               <Icon 
                 name={senhaOculta ? 'eye-off-outline' : 'eye-outline'} 
                 size={20} 
                 color={colors.primary2}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
           {senhaError ? <Text style={styles.errorText}>{senhaError}</Text> : null}
 
@@ -282,20 +275,20 @@ export default function CadastroScreen() {
               onChangeText={setConfirmarSenha}
               placeholderTextColor="#ABABAB"
             />
-            <TouchableOpacity onPress={() => setConfirmarSenhaOculta(!confirmarSenhaOculta)}>
+            <Pressable onPress={() => setConfirmarSenhaOculta(!confirmarSenhaOculta)}>
               <Icon 
                 name={confirmarSenhaOculta ? 'eye-off-outline' : 'eye-outline'} 
                 size={20} 
                 color={colors.primary2} 
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
           {confirmarSenhaError ? <Text style={styles.errorText}>{confirmarSenhaError}</Text> : null}
 
           {/* Botão para ir para a próxima etapa */}
-          <TouchableOpacity style={buttons.primary} onPress={handleNextStep}>
+          <Pressable style={buttons.primary} onPress={handleNextStep}>
             <Text style={buttonText.primary}>Continuar</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </>
     );
@@ -306,12 +299,12 @@ export default function CadastroScreen() {
     return (
       <>
         <View style={styles.header}>
-          {/* <TouchableOpacity
+          {/* <Pressable
             style={styles.backButton}
-            onPress={() => navigation.goBack()}
+            onPress={() => router.back()}
           >
             <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-          </TouchableOpacity> */}
+          </Pressable> */}
           <Text style={styles.headerTitle}>Cadastrar</Text>
         </View>
         <View style={styles.container1}>
@@ -321,7 +314,7 @@ export default function CadastroScreen() {
             {fissuras.map((item) => {
               const isSelected = tipoFissura === item.id;
               return (
-                <TouchableOpacity
+                <Pressable
                   key={item.id}
                   style={[
                     styles.fissuraButton,
@@ -335,7 +328,7 @@ export default function CadastroScreen() {
                   ]}>
                     {item.label}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               );
             })}
           </View>
@@ -345,7 +338,7 @@ export default function CadastroScreen() {
             {opcoes.map((opcao) => {
               const isSelected = opcoesSelecionadas.includes(opcao);
               return (
-                <TouchableOpacity
+                <Pressable
                   key={opcao}
                   style={[
                     styles.opcaoButton,
@@ -359,14 +352,14 @@ export default function CadastroScreen() {
                   ]}>
                     {opcao}
                   </Text>
-                </TouchableOpacity>
+                </Pressable>
               );
             })}
           </View>
 
-          <TouchableOpacity style={styles.button1} onPress={handleFinish}>
+          <Pressable style={styles.button1} onPress={handleFinish}>
             <Text style={styles.buttonText1}>Finalizar cadastro</Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </>
     );
@@ -402,12 +395,12 @@ export default function CadastroScreen() {
           <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Algo deu errado</Text>
             <Text style={styles.modalMessage}>Falha ao realizar cadastro.</Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.modalButton}
               onPress={() => setModalVisible(false)}
             >
               <Text style={styles.modalButtonText}>OK</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -531,6 +524,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 12,
     marginBottom: 10,
+    backgroundColor: colors.white,
   },
   icon: {
     marginRight: 8

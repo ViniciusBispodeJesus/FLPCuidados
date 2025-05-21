@@ -3,25 +3,14 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import { colors } from '@/constants';
 
-// Definindo o tipo de navegação localmente
-type RootStackParamList = {
-  centros: undefined;
-  equipe: undefined;
-  sobre_o_projeto: undefined;
-  contato: undefined;
-  atualizarcadastro: undefined;
-  atualizarsenha: undefined;
-  login: undefined;
-};
-
 export default function OpcoesScreen() {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const router = useRouter();
 
   const handleLogout = async () => {
     try {
@@ -29,7 +18,7 @@ export default function OpcoesScreen() {
       // await AsyncStorage.removeItem('userToken');
 
       // Navega para a tela de login
-      navigation.navigate('login');
+      router.replace('/login');
     } catch (err) {
       console.error('Erro ao sair:', err);
     }
@@ -38,82 +27,89 @@ export default function OpcoesScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
+        <Pressable
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.back()}
         >
-          <Icon name="arrow-back-outline" size={24} color={colors.secondary}/>
-        </TouchableOpacity>
+          <Icon name="arrow-back-outline" size={24} color={colors.secondary} />
+        </Pressable>
         <Text style={styles.headerTitle}>Opções</Text>
       </View>
 
       <View style={styles.container1}>
+        {/* Centros especializados */}
         <View style={styles.cardOpcao}>
-          <TouchableOpacity
+          <Pressable
             style={styles.infoBox}
-            onPress={() => navigation.navigate('centros')}
+            onPress={() => router.push('/centros')}
           >
             <Text style={styles.cardOpcaoText}>Centros especializados</Text>
             <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
+        {/* Conheça a equipe */}
         <View style={styles.cardOpcao}>
-          <TouchableOpacity
+          <Pressable
             style={styles.infoBox}
-            onPress={() => navigation.navigate('equipe')}
+            onPress={() => router.push('/equipe')}
           >
             <Text style={styles.cardOpcaoText}>Conheça a equipe do projeto</Text>
             <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
+        {/* Sobre o projeto */}
         <View style={styles.cardOpcao}>
-          <TouchableOpacity
+          <Pressable
             style={styles.infoBox}
-            onPress={() => navigation.navigate('sobre_o_projeto')}
+            onPress={() => router.push('/sobre_o_projeto')}
           >
             <Text style={styles.cardOpcaoText}>Sobre o Projeto Craniofacial - UFS</Text>
             <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
+        {/* Contato */}
         <View style={styles.cardOpcao}>
-          <TouchableOpacity
+          <Pressable
             style={styles.infoBox}
-            onPress={() => navigation.navigate('contato')}
+            onPress={() => router.push('/contato')}
           >
             <Text style={styles.cardOpcaoText}>Contatos e informações</Text>
             <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
+        {/* Atualizar cadastro */}
         <View style={styles.cardOpcao}>
-          <TouchableOpacity
+          <Pressable
             style={styles.infoBox}
-            onPress={() => navigation.navigate('atualizarcadastro')}
+            onPress={() => router.push('/atualizarcadastro')}
           >
             <Text style={styles.cardOpcaoText}>Atualizar cadastro</Text>
             <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
+        {/* Alterar senha */}
         <View style={styles.cardOpcao}>
-          <TouchableOpacity
+          <Pressable
             style={styles.infoBox}
-            onPress={() => navigation.navigate('atualizarsenha')}
+            onPress={() => router.push('/atualizarsenha')}
           >
             <Text style={styles.cardOpcaoText}>Alterar senha</Text>
             <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
+        {/* Sair */}
         <View style={styles.cardOpcao}>
-          <TouchableOpacity style={styles.infoBox} onPress={handleLogout}>
+          <Pressable style={styles.infoBox} onPress={handleLogout}>
             <Icon name="close-outline" size={24} color={colors.secondary} />
             <Text style={styles.cardOpcaoText}>Sair</Text>
             <Icon name="chevron-forward-outline" size={24} color={colors.secondary} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
       </View>
     </View>

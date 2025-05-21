@@ -1,27 +1,17 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
-  Linking,
+  Pressable,
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-//import { useNavigation } from '@react-navigation/native';
 import { colors } from '@/constants';
 import { router } from 'expo-router';
 
 export default function CentrosEspecializadosScreen() {
-  //const navigation = useNavigation();
-
-  // Desativa o cabeçalho padrão ao carregar a tela
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerShown: false, // Remove o cabeçalho padrão do React Navigation
-  //   });
-  // }, [navigation]);
 
   // const handleOpenLink = (url: string | null) => {
   //   if (url) {
@@ -33,12 +23,12 @@ export default function CentrosEspecializadosScreen() {
     <View style={styles.container}>
       {/* Cabeçalho com botão de voltar e título centralizado */}
       <View style={styles.header}>
-        <TouchableOpacity
+        <Pressable
           style={styles.backButton}
           onPress={() => router.back()}
         >
           <Icon name="arrow-back-outline" size={24} color={colors.secondary} />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.headerTitle}>Sobre o Projeto</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>

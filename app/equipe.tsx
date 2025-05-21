@@ -1,28 +1,20 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   Image,
-  TouchableOpacity,
+  Pressable,
   Linking // Para abrir links externos
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
 import { colors } from '@/constants';
+import { useRouter } from 'expo-router';
 
 export default function EquipeScreen() {
-  const navigation = useNavigation();
+  const router = useRouter();
 
-    // Desativa o cabeçalho padrão ao carregar a tela
-    useLayoutEffect(() => {
-      navigation.setOptions({
-        headerShown: false, // Remove o cabeçalho padrão do React Navigation
-      });
-    }, [navigation]);
-
-  // Exemplo de dados da equipe
   const equipe = [
     {
       id: '1',
@@ -85,12 +77,12 @@ export default function EquipeScreen() {
     <View style={styles.container}>
       {/* Cabeçalho com botão de voltar e título centralizado */}
       <View style={styles.header}>
-        <TouchableOpacity
+        <Pressable
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.back()}
         >
           <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.headerTitle}>Equipe do Projeto</Text>
       </View>
 
@@ -107,29 +99,29 @@ export default function EquipeScreen() {
               <Text style={styles.funcao}>{membro.funcao}</Text>
               <Text style={styles.descricao}>{membro.descricao}</Text>
               <View style={styles.redesContainer}>
-                {membro.redes.instagram && (
-                  <TouchableOpacity
+                {!!membro.redes.instagram && (
+                  <Pressable
                     style={styles.iconeSocial}
                     onPress={() => handleOpenLink(membro.redes.instagram)}
                   >
                     <Icon name="logo-instagram" size={24} color="#C13584" />
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
-                {membro.redes.facebook && (
-                  <TouchableOpacity
+                {!!membro.redes.facebook && (
+                  <Pressable
                     style={styles.iconeSocial}
                     onPress={() => handleOpenLink(membro.redes.facebook)}
                   >
                     <Icon name="logo-facebook" size={24} color="#3b5998" />
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
-                {membro.redes.linkedin && (
-                  <TouchableOpacity
+                {!!membro.redes.linkedin && (
+                  <Pressable
                     style={styles.iconeSocial}
                     onPress={() => handleOpenLink(membro.redes.linkedin)}
                   >
                     <Icon name="logo-linkedin" size={24} color="#0077b5" />
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
               </View>
             </View>
@@ -209,4 +201,3 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
 });
-

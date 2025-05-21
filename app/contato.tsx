@@ -1,25 +1,18 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
+  Pressable,
   Linking,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
 import { colors } from '@/constants';
+import { useRouter } from 'expo-router';
 
 export default function CentrosEspecializadosScreen() {
-  const navigation = useNavigation();
-
-    // Desativa o cabeçalho padrão ao carregar a tela
-    useLayoutEffect(() => {
-      navigation.setOptions({
-        headerShown: false, // Remove o cabeçalho padrão do React Navigation
-      });
-    }, [navigation]);
+  const router = useRouter();
 
   const handleOpenLink = (url: string | null) => {
     if (url) {
@@ -31,12 +24,12 @@ export default function CentrosEspecializadosScreen() {
     <View style={styles.container}>
       {/* Cabeçalho com botão de voltar e título centralizado */}
       <View style={styles.header}>
-        <TouchableOpacity
+        <Pressable
           style={styles.backButton}
-          onPress={() => navigation.goBack()}
+          onPress={() => router.back()}
         >
           <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.headerTitle}>Contatos e Informações</Text>
       </View>
 
@@ -45,23 +38,22 @@ export default function CentrosEspecializadosScreen() {
         {/* Seção de Endereço */}
         <View style={styles.infoContainer}>
           <Text style={styles.label}>Endereço</Text>
-          <TouchableOpacity
+          <Pressable
             style={styles.infoBox}
             onPress={() => handleOpenLink('https://maps.app.goo.gl/eg78ZVYhXPvnLhj48')}
           >
             <Icon name="location-outline" size={24} color={colors.cor_pag_especifica} style={styles.leftIcon} />
             
-            <Text style={styles.infoText}> Av. Marcelo DÉda, 13, São José, Lagarto SE - Brasil. 
-            <br></br>CEP: 49400-000</Text>
+            <Text style={styles.infoText}>Av. Marcelo DÉda, nº 13, São José, Lagarto SE - Brasil.{"\n"}CEP: 49400-000</Text>
             
             <Icon name="chevron-forward-outline" size={24} color={colors.cor_pag_especifica} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* Seção de E-mail */}
         <View style={styles.infoContainer}>
           <Text style={styles.label}>E-mail</Text>
-          <TouchableOpacity
+          <Pressable
             style={styles.infoBox}
             onPress={() => handleOpenLink('mailto:craniofacial.ufs@gmail.com')}
           >
@@ -70,13 +62,13 @@ export default function CentrosEspecializadosScreen() {
             <Text style={styles.infoText}>craniofacial.ufs@gmail.com</Text>
             
             <Icon name="chevron-forward-outline" size={24} color={colors.cor_pag_especifica} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* Seção de Telefone */}
         <View style={styles.infoContainer}>
           <Text style={styles.label}>Telefone</Text>
-          <TouchableOpacity
+          <Pressable
             style={styles.infoBox}
             onPress={() => handleOpenLink('tel:+557936322128')}
           >
@@ -85,24 +77,24 @@ export default function CentrosEspecializadosScreen() {
             <Text style={styles.infoText}>(79) 3632-2128</Text>
 
             <Icon name="chevron-forward-outline" size={24} color={colors.cor_pag_especifica} style={styles.rightIcon} />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         {/* Seção de Redes Sociais */}
         <View style={styles.socialContainer}>
-          <TouchableOpacity
+          <Pressable
             style={styles.socialButton}
             onPress={() => handleOpenLink('https://www.youtube.com/')}
           >
             <Icon name="logo-youtube" size={40} color="#FF0000" />
-          </TouchableOpacity>
+          </Pressable>
 
-          <TouchableOpacity
+          <Pressable
             style={styles.socialButton}
             onPress={() => handleOpenLink('https://www.instagram.com/')}
           >
             <Icon name="logo-instagram" size={40} color="#C13584" />
-          </TouchableOpacity>
+          </Pressable>
         </View>
 
         <Text style={styles.socialText}>Clique e acompanhe nossas redes sociais</Text>

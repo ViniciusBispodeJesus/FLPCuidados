@@ -32,7 +32,7 @@ export default function RootLayout() {
         />
 
         {/* O restante herda headerShown: false */}
-        <Stack.Screen name="splash" />
+        <Stack.Screen name="home" />
         <Stack.Screen name="login" />
         <Stack.Screen name="recuperarsenha" />
         <Stack.Screen name="cadastro" />

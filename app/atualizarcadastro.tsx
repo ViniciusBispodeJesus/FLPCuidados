@@ -1,17 +1,16 @@
-import React, { useState,useLayoutEffect} from 'react';
+import React, { useState } from 'react';
 
 import { 
   View,
   Text, 
   TextInput, 
   StyleSheet, 
-  TouchableOpacity, 
+  Pressable,
   ActivityIndicator,
-  Modal,
-  FlatList
+  Modal
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import { 
   colors,
   buttons,
@@ -22,14 +21,7 @@ import {
 import { TextInputMask } from 'react-native-masked-text';
 
 export default function CadastroScreen() {
-  const navigation = useNavigation();
-
-  // Desativa o cabeçalho padrão ao carregar a tela
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false, // Remove o cabeçalho padrão do React Navigation
-    });
-  }, [navigation]);
+  const router = useRouter();
 
   // -------------------------------------------------------------
   // 1) ESTADOS GERAIS
@@ -149,7 +141,7 @@ export default function CadastroScreen() {
       console.log('Cadastro atualizado com sucesso!');
 
       // Exemplo: navegar ou limpar formulário
-      // navigation.navigate('Home');
+      // router.navigate('Home');
     } catch (error) {
       console.log(error);
       setModalVisible(true);
@@ -165,12 +157,12 @@ export default function CadastroScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-            <TouchableOpacity
+            <Pressable
                 style={styles.backButton}
-                onPress={() => navigation.goBack()}
+                onPress={() => router.back()}
             >
                 <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-            </TouchableOpacity>
+            </Pressable>
             <Text style={styles.headerTitle}>Atualizar Cadastro</Text>
             </View>
             <View style={styles.container1}>
@@ -226,9 +218,9 @@ export default function CadastroScreen() {
                 {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
                 {/* Botão para ir para a próxima etapa */}
-                <TouchableOpacity style={buttons.primary} onPress={handleNextStep}>
+                <Pressable style={buttons.primary} onPress={handleNextStep}>
                 <Text style={buttonText.primary}>Continuar</Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>    
         </View>
     );
@@ -239,12 +231,12 @@ export default function CadastroScreen() {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-            <TouchableOpacity
+            <Pressable
                 style={styles.backButton}
-                onPress={() => navigation.goBack()}
+                onPress={() => router.back()}
             >
                 <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-            </TouchableOpacity>
+            </Pressable>
             <Text style={styles.headerTitle}>Cadastrar</Text>
             </View>
             <View style={styles.container1}>
@@ -253,7 +245,7 @@ export default function CadastroScreen() {
                 {fissuras.map((item) => {
                     const isSelected = tipoFissura === item.id;
                     return (
-                    <TouchableOpacity
+                    <Pressable
                         key={item.id}
                         style={[
                         styles.fissuraButton,
@@ -267,7 +259,7 @@ export default function CadastroScreen() {
                         ]}>
                         {item.label}
                         </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                     );
                 })}
                 </View>
@@ -277,7 +269,7 @@ export default function CadastroScreen() {
                 {opcoes.map((opcao) => {
                     const isSelected = opcoesSelecionadas.includes(opcao);
                     return (
-                    <TouchableOpacity
+                    <Pressable
                         key={opcao}
                         style={[
                         styles.opcaoButton,
@@ -291,14 +283,14 @@ export default function CadastroScreen() {
                         ]}>
                         {opcao}
                         </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                     );
                 })}
                 </View>
 
-                <TouchableOpacity style={buttons.primary} onPress={handleFinish}>
+                <Pressable style={buttons.primary} onPress={handleFinish}>
                 <Text style={buttonText.primary}>Finalizar cadastro</Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>
         </View>
     );
@@ -334,12 +326,12 @@ export default function CadastroScreen() {
           <View style={styles.modalContainer}>
             <Text style={styles.modalTitle}>Algo deu errado</Text>
             <Text style={styles.modalMessage}>Falha ao realizar cadastro.</Text>
-            <TouchableOpacity
+            <Pressable
               style={styles.modalButton}
               onPress={() => setModalVisible(false)}
             >
               <Text style={styles.modalButtonText}>OK</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -463,6 +455,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 12,
     marginBottom: 16,
+    backgroundColor: colors.white,
   },
   icon: {
     marginRight: 8

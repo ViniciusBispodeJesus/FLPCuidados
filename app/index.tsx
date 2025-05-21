@@ -15,7 +15,7 @@ export default function Splash() {
   return (
     <View style={styles.container}>
       <Image
-        source={require('@/assets/images/logo2.png')}
+        source={require('@/assets/images/logo3.png')}
         style={{ width: 200, height: 200, marginBottom: 16, alignSelf: 'center' }}
       />
     </View>

@@ -1,24 +1,23 @@
-import { Link, Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
-
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Stack, useRouter } from 'expo-router';
+import { View, Text, StyleSheet } from 'react-native';
 import { 
   colors,
   buttons,
   buttonText 
 } from '@/constants';
+import { Pressable } from 'react-native-gesture-handler';
 
 export default function NotFoundScreen() {
+  const router = useRouter();
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
-      <ThemedView style={styles.container}>
-        <ThemedText type="title" style={styles.title}>Página não encontrada.</ThemedText>
-        <Link href="/" style={buttons.primary}>
-          <ThemedText style={buttonText.primary}>Voltar a página principal!</ThemedText>
-        </Link>
-      </ThemedView>
+      <View style={styles.container}>
+        <Text style={styles.title}>Página não encontrada.</Text>
+        <Pressable style={buttons.primary} onPress={() => router.push('/')}>
+          <Text style={buttonText.primary}>Voltar a Página Principal</Text>
+        </Pressable>
+      </View>
     </>
   );
 }
@@ -38,6 +37,9 @@ const styles = StyleSheet.create({
   title:{
     textAlign: 'center',
     fontSize: 30,
+    fontWeight: 'bold',
+    color: colors.secondary,
+    marginBottom: 20,
   },
   button1: {
     borderRadius: 25,

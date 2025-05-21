@@ -1,45 +1,22 @@
-import React, { useLayoutEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Platform } from 'react-native';
-import { WebView } from 'react-native-webview'; // Usado apenas em mobile
-import { RouteProp, useNavigation } from '@react-navigation/native';
+import { View, Text, StyleSheet, ScrollView, Platform, Pressable } from 'react-native';
+import { WebView } from 'react-native-webview';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { 
-  colors,
-  buttons,
-  buttonText 
-} from '@/constants';
+import { colors } from '@/constants';
 
-type RootStackParamList = {
-  SingleConteudo: {
-    type: 'video' | 'audio' | 'podcast';
-    title: string;
-    content: string;
-    mediaUrl: string;
-  };
-};
+export default function SingleConteudo() {
+  const router = useRouter();
+  const params = useLocalSearchParams<{
+    type?: string;
+    title?: string;
+    content?: string;
+    mediaUrl?: string;
+  }>();
 
-type SingleConteudoRouteProp = RouteProp<RootStackParamList, 'SingleConteudo'>;
-
-interface SingleConteudoProps {
-  readonly route?: SingleConteudoRouteProp;
-}
-
-export default function SingleConteudo({ route }: SingleConteudoProps) {
-  const { type, title, content, mediaUrl } = route?.params || {
-    type: 'video',
-    title: 'Título Padrão',
-    content: 'Conteúdo Padrão',
-    mediaUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-  };
-  const navigation = useNavigation();
-
-  // Desativa o cabeçalho padrão ao carregar a tela
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false, // Remove o cabeçalho padrão do React Navigation
-    });
-  }, [navigation]);
+  const type = (params.type as 'video' | 'audio' | 'podcast') ?? 'video';
+  const title = params.title ?? 'Título Padrão';
+  const content = params.content ?? 'Conteúdo Padrão';
+  const mediaUrl = params.mediaUrl ?? 'https://www.youtube.com/embed/dQw4w9WgXcQ';
 
   const renderMidia = () => {
     switch (type) {
@@ -82,21 +59,18 @@ export default function SingleConteudo({ route }: SingleConteudoProps) {
 
   return (
     <View style={styles.container}>
-        <View style={styles.header}>
-            <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => navigation.goBack()}
-            >
-                <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-            </TouchableOpacity>
-            <Text style={styles.headerTitle}>Conteúdo - {type.toUpperCase()}</Text>
-        </View>
-        <View style={styles.container1}>
-            {/* Título e conteúdo */}
-            <Text style={styles.title}>{title}</Text>
-            {renderMidia()}
-            <Text style={styles.contentText}>{content}</Text>
-        </View>
+      <View style={styles.header}>
+        <Pressable style={styles.backButton} onPress={() => router.back()}>
+          <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
+        </Pressable>
+        <Text style={styles.headerTitle}>Conteúdo - {type.toUpperCase()}</Text>
+      </View>
+
+      <ScrollView contentContainerStyle={styles.container1}>
+        <Text style={styles.title}>{title}</Text>
+        {renderMidia()}
+        <Text style={styles.contentText}>{content}</Text>
+      </ScrollView>
     </View>
   );
 }
@@ -108,6 +82,7 @@ const styles = StyleSheet.create({
   },
   container1: {
     paddingHorizontal: 16,
+    paddingBottom: 24,
   },
   header: {
     padding: 16,
@@ -129,7 +104,6 @@ const styles = StyleSheet.create({
     color: '#BD9D56',
     textAlign: 'center',
   },
-  // Título do conteúdo
   title: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -138,8 +112,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 16,
   },
-
-  // Texto do conteúdo
   contentText: {
     fontSize: 16,
     lineHeight: 24,
@@ -148,8 +120,6 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     fontWeight: '600',
   },
-
-  // Container do vídeo
   videoContainer: {
     width: '100%',
     aspectRatio: 16 / 9,
@@ -165,8 +135,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-
-  // Container de áudio
   audioContainer: {
     backgroundColor: '#f1f1f1',
     padding: 12,
@@ -177,8 +145,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
   },
-
-  // Container de podcast
   podcastContainer: {
     backgroundColor: '#eef1f6',
     padding: 12,
@@ -189,8 +155,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#555',
   },
-
-  // Aviso para tipo de conteúdo não suportado
   warningText: {
     fontSize: 14,
     color: 'red',

@@ -1,13 +1,13 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   View,
   Text, 
   TextInput, 
   StyleSheet, 
-  TouchableOpacity, 
+  Pressable, 
   Image,
   ActivityIndicator,
-  Modal
+  Modal,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
@@ -17,34 +17,17 @@ import {
   buttonText 
 } from '@/constants';
 
-
 export default function RecuperarSenha() {
-  //const navigation = useNavigation();
   const router = useRouter();
 
-  // // Desativa o cabeçalho padrão ao carregar a tela
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerShown: false, // Remove o cabeçalho padrão do React Navigation
-  //   });
-  // }, [navigation]);
-
-  // Estado para o e-mail
   const [email, setEmail] = useState('');
-
-  // Estado de carregamento e de modal de erro
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
-  // Estado de erro de e-mail (caso o usuário digite algo inválido)
   const [emailError, setEmailError] = useState('');
 
-  // Função que simula o envio do e-mail de recuperação
   const handleSendEmail = async () => {
-    // Reseta o estado de erro
     setEmailError('');
 
-    // Validação simples de e-mail
     if (!email.trim()) {
       setEmailError('O campo E-mail é obrigatório');
       return;
@@ -53,44 +36,33 @@ export default function RecuperarSenha() {
       return;
     }
 
-    // Inicia o carregamento
-    setIsLoading(true);
-
     try {
-      // Simulação de "tentando enviar e-mail" - substitua pela sua lógica real
       console.log('Enviando e-mail de recuperação para:', email);
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Exemplo: se deu algum erro no servidor
-      const envioFalhou = false; // Ajuste para true para simular erro
+      const envioFalhou = false;
       if (envioFalhou) {
         throw new Error('Falha ao enviar e-mail de recuperação');
       }
 
-      // Se chegou aqui, deu certo
       console.log('E-mail de recuperação enviado com sucesso!');
-      // Exemplo: navegue para alguma tela de confirmação, ou feche esta
-      // navigation.goBack();
+      setModalVisible(true);
     } catch (error) {
       console.log(error);
-      // Abre o modal de erro
       setModalVisible(true);
-    } finally {
-      // Finaliza carregamento
-      setIsLoading(false);
     }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+        <Pressable onPress={() => router.back()} style={styles.backButton}>
           <Icon name="arrow-back-outline" size={24} color="#BD9D56" />
-        </TouchableOpacity>
+        </Pressable>
         <Text style={styles.headerTitle}>Esqueci minha senha</Text>
       </View>
+
       <View style={styles.container1}>
-        {/* Modal de Erro */}
         <Modal
           animationType="fade"
           transparent={true}
@@ -99,38 +71,41 @@ export default function RecuperarSenha() {
         >
           <View style={styles.modalBackground}>
             <View style={styles.modalContainer}>
-              <Text style={styles.modalTitle}>Algo deu errado</Text>
-              <Text style={styles.modalMessage}>Falha ao enviar e-mail de recuperação.</Text>
-              <TouchableOpacity
+              <Text style={styles.modalTitle}>Verifique seu e-mail</Text>
+              <Text style={styles.modalMessage}>
+                Se este e-mail estiver cadastrado, você receberá instruções para redefinir sua senha.
+              </Text>
+              <Pressable
                 style={styles.modalButton}
-                onPress={() => setModalVisible(false)}
+                onPress={() => {
+                  setModalVisible(false);
+                  setIsLoading(true);
+                  setTimeout(() => {
+                    setIsLoading(false);
+                    router.replace('/login');
+                  }, 2000);
+                }}
               >
                 <Text style={styles.modalButtonText}>OK</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </Modal>
 
-        {/* Overlay de Carregamento */}
         {isLoading && (
           <View style={styles.loadingOverlay}>
-            <ActivityIndicator size="large" color="#AEACFB" />
+            <ActivityIndicator size="large" color={colors.primary} />
           </View>
         )}
 
-        {/* Logo (caso deseje) */}
         <Image
-          source={require('@/assets/images/logo2.png')}
+          source={require('@/assets/images/logo3.png')}
           style={styles.logo}
         />
 
-        {/* Título da tela */}
         <Text style={styles.title}>Esqueci minha senha</Text>
-
-        {/* Subtítulo / instrução */}
         <Text style={styles.label}>Informe seu e-mail de cadastro</Text>
 
-        {/* Campo de e-mail com ícone */}
         <View style={[
           styles.inputContainer, 
           emailError ? { borderColor: 'red' } : null
@@ -147,25 +122,22 @@ export default function RecuperarSenha() {
           />
         </View>
 
-        {/* Exibe mensagem de erro se existir */}
         {emailError ? <Text style={styles.errorText}>{emailError}</Text> : null}
 
-        {/* Botão de Enviar */}
-        <TouchableOpacity style={buttons.primary} onPress={handleSendEmail}>
+        <Pressable style={buttons.primary} onPress={handleSendEmail}>
           <Text style={buttonText.primary}>Enviar</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );
 }
 
-// Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.fundo,
   },
-    container1: {
+  container1: {
     paddingHorizontal: 16,
   },
   logo: {
@@ -198,7 +170,8 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     alignSelf: 'center',
     width: '100%',
-    maxWidth: 340 // Para não ficar muito largo em telas grandes
+    maxWidth: 340,
+    backgroundColor: colors.white,
   },
   icon: {
     marginRight: 8
@@ -229,7 +202,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
-    header: {
+  header: {
     width: '100%',
     padding: 16,
     backgroundColor: '#fff',
@@ -251,7 +224,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#BD9D56',
   },
-  // Overlay de carregamento
   loadingOverlay: {
     position: 'absolute',
     left: 0,
@@ -263,7 +235,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 999
   },
-  // Modal de erro
   modalBackground: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.4)',
